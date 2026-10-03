@@ -50,6 +50,7 @@ const jobSchema = z.object({
   endSeconds: z.number().positive().optional(),
 });
   const parsed = jobSchema.safeParse(request.body);
+app.post("/api/jobs", async (request, reply) => {
   if (!parsed.success) {
     return reply.code(400).send({ error: "Invalid download options.", details: parsed.error.flatten() });
   }
