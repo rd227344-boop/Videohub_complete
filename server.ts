@@ -49,7 +49,6 @@ const jobSchema = z.object({
   startSeconds: z.number().min(0).optional(),
   endSeconds: z.number().positive().optional(),
 });
-});
   const parsed = jobSchema.safeParse(request.body);
   if (!parsed.success) {
     return reply.code(400).send({ error: "Invalid download options.", details: parsed.error.flatten() });
@@ -75,8 +74,6 @@ const jobSchema = z.object({
     statusUrl: `/api/jobs/${job.id}`,
     downloadUrl: `/api/jobs/${job.id}/download`,
   });
-});
-
 app.get("/api/jobs/:id", async (request, reply) => {
   const { id } = request.params as { id: string };
   const job = await queue.getJob(id);
