@@ -132,7 +132,7 @@ app.delete("/api/jobs/:id", async (request, reply) => {
   await fs.rm(jobDir(id), { recursive: true, force: true });
   return { ok: true, state: "cancelled" };
 });
-  const start = async () => {
+const start = async () => {
   try {
     await ensureDir();
     const port = Number(process.env.PORT) || Number(config.port) || 3000;
