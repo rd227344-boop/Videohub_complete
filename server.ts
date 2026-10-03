@@ -146,4 +146,8 @@ app.get("/api/jobs/:id/download", async (request, reply) => {
   }
 
   start();
+app.get('/', async () => {
+  return { status: "Videohub Backend is running successfully!" };
+});
+
   
