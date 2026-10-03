@@ -122,26 +122,27 @@ app.get("/api/jobs/:id/download", async (request, reply) => {
   reply.type("application/octet-stream");
   return reply.send(await fs.readFile(filePath));
 });
+  app.delete('/api/jobs/:id', async (request, reply) => {
+    const { id } = request.params as { id: string };
+    const job = await queue.getJob(id);
+    if (!job) return reply.code(404).send({ error: "Job not found." });
 
-app.delete("/api/jobs/:id", async (request, reply) => {
-  const { id } = request.params as { id: string };
-  const job = await queue.getJob(id);
-  if (!job) return reply.code(404).send({ error: "Job not found." });
+    await job.remove();
+    await fs.rm(jobDir(id), { recursive: true, force: true });
+    return { ok: true, state: "cancelled" };
+  });
 
-  await job.remove();
-  await fs.rm(jobDir(id), { recursive: true, force: true });
-  return { ok: true, state: "cancelled" };
-});
-const start = async () => {
-  try {
-    await ensureDir();
-    const port = Number(process.env.PORT) || Number(config.port) || 3000;
-    await app.listen({ port, host: "0.0.0.0" });
-    console.log(`Videohub backend listening on ${port}`);
-  } catch (err) {
-    app.log.error(err);
-    process.exit(1);
-  }
-};
+  const start = async () => {
+    try {
+      await ensureDir();
+      const port = Number(process.env.PORT) || Number(config.port) || 3000;
+      await app.listen({ port, host: "0.0.0.0" });
+      console.log(`Videohub backend listening on ${port}`);
+    } catch (err) {
+      app.log.error(err);
+      process.exit(1);
+    }
+  };
 
-start();
+  start();
+  
