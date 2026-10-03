@@ -1,5 +1,5 @@
 // VideoHub frontend connected to the VideoHub backend.
-const API_BASE_URL = "https://backend-file-pahadi99.onrender.com";
+const API_BASE_URL = "https://videohub-complete-2.onrender.com";
 
 const $ = (id) => document.getElementById(id);
 
