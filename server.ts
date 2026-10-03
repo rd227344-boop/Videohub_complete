@@ -26,7 +26,6 @@ app.get("/api/health", async () => ({
 const analyzeSchema = z.object({
   url: z.string().url()
 });
-});
 
 app.post("/api/analyze", async (request, reply) => {
   const parsed = analyzeSchema.safeParse(request.body);
