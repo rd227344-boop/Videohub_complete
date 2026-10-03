@@ -135,7 +135,7 @@ app.get("/api/jobs/:id/download", async (request, reply) => {
 
   const start = async () => {
     try {
-      await ensureDir();
+      await ensureDirs();
       const port = Number(process.env.PORT) || Number(config.port) || 3000;
       await app.listen({ port, host: "0.0.0.0" });
       console.log(`Videohub backend listening on ${port}`);
