@@ -1,5 +1,5 @@
 import { Queue } from "bullmq";
-import Redis from "ioredis";
+import Redis from "redis";
 import { config } from "./config.js";
 import type { DownloadJobData } from "./types.js";
 
