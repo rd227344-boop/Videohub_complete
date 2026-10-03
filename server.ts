@@ -75,6 +75,7 @@ app.post("/api/jobs", async (request, reply) => {
     statusUrl: `/api/jobs/${job.id}`,
     downloadUrl: `/api/jobs/${job.id}/download`,
   });
+  });
 app.get("/api/jobs/:id", async (request, reply) => {
   const { id } = request.params as { id: string };
   const job = await queue.getJob(id);
