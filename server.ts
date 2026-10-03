@@ -22,10 +22,10 @@ app.get("/api/health", async () => ({
   ok: true,
   service: "videohub-backend",
   time: new Date().toISOString(),
-}));
-
+}))
 const analyzeSchema = z.object({
-  url: z.string().url().refine(u => /^https?:\\/\\//i.test(u), "Only http/https URLs are allowed"),
+  url: z.string().url()
+});
 });
 
 app.post("/api/analyze", async (request, reply) => {
@@ -43,16 +43,14 @@ app.post("/api/analyze", async (request, reply) => {
     return reply.code(422).send({ error: error instanceof Error ? error.message : "Analysis failed." });
   }
 });
-
 const jobSchema = z.object({
-  url: z.string().url().refine(u => /^https?:\\/\\//i.test(u), "Only http/https URLs are allowed"),
+  url: z.string().url(),
   format: z.enum(["mp4", "mp3"]).default("mp4"),
   quality: z.enum(["1080p", "720p", "480p", "360p"]).default("1080p"),
   startSeconds: z.number().min(0).optional(),
   endSeconds: z.number().positive().optional(),
 });
-
-app.post("/api/jobs", async (request, reply) => {
+});
   const parsed = jobSchema.safeParse(request.body);
   if (!parsed.success) {
     return reply.code(400).send({ error: "Invalid download options.", details: parsed.error.flatten() });
