@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VideoHub — Download & Convert Videos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#"><span class="brand-play">▶</span> VideoHub</a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#downloader">Downloader</a>
+        <a href="#tools">Converter</a>
+        <a href="#tools">Tools</a>
+        <a href="#history">History</a>
+        <a href="#how-to-use">How to Use</a>
+        <a href="#about">About</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle theme">☾</button>
+        <button class="language-btn" type="button">◎ English⌄</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero" id="downloader">
+      <div class="container">
+        <div class="hero-card">
+          <div class="hero-heading">
+            <p class="eyebrow">▶ VIDEO DOWNLOADER</p>
+            <h1>Download &amp; Convert Videos</h1>
+            <p>Paste a video link from YouTube, Instagram, Facebook, TikTok or other supported platforms.</p>
+          </div>
+
+          <div class="platforms" aria-label="Supported platforms">
+            <span>▶ YouTube</span>
+            <span>◎ Instagram</span>
+            <span>f Facebook</span>
+            <span>♪ TikTok</span>
+            <span>𝕏 X (Twitter)</span>
+            <span>••• More</span>
+          </div>
+
+          <form id="analyzeForm" class="url-form">
+            <div class="url-input-wrap">
+              <span>🔗</span>
+              <input id="videoUrl" type="url" placeholder="Paste your video link here..." autocomplete="off" required>
+            </div>
+            <button class="primary-btn" type="submit">▣ Analyze</button>
+          </form>
+
+          <p class="copyright-note">▣ We respect copyright. Download only content you have rights to or that is allowed to be downloaded.</p>
+          <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+          <section id="resultPanel" class="result-panel hidden">
+            <div class="result-top">
+              <div>
+                <span class="status-pill">✓ Link received</span>
+                <h2>Choose your download options</h2>
+                <p id="analyzedUrl" class="muted"></p>
+              </div>
+              <button id="resetBtn" class="ghost-btn" type="button">Reset</button>
+            </div>
+
+            <div class="media-preview">
+              <div id="previewThumb" class="preview-thumb">▶</div>
+              <div>
+                <h3 id="previewTitle">Video preview</h3>
+                <p id="previewMeta" class="muted">Analyze a link to load title, thumbnail and duration.</p>
+              </div>
+            </div>
+
+            <div class="options-grid">
+              <label>
+                <span>Format</span>
+                <select id="format">
+                  <option value="mp4">MP4</option>
+                  <option value="mp3">MP3</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Quality</span>
+                <select id="quality">
+                  <option value="1080p">1080p (Full HD)</option>
+                  <option value="720p">720p (HD)</option>
+                  <option value="480p">480p</option>
+                  <option value="360p">360p</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="trim-box">
+              <div class="trim-title">
+                <div>
+                  <h3>✂ Trim Video <span>(Optional)</span></h3>
+                  <p class="muted">Leave both fields empty to process the full media.</p>
+                </div>
+                <button id="clearTrimBtn" class="small-btn" type="button">Clear</button>
+              </div>
+
+              <div class="options-grid">
+                <label>
+                  <span>Start Time</span>
+                  <input id="startTime" type="text" inputmode="numeric" placeholder="00:00:00">
+                </label>
+                <label>
+                  <span>End Time</span>
+                  <input id="endTime" type="text" inputmode="numeric" placeholder="00:00:00">
+                </label>
+              </div>
+              <p id="durationText" class="duration">Duration: —</p>
+            </div>
+
+            <button id="downloadBtn" class="download-btn" type="button">⇩ Download Video</button>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tools">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">TOOLS</p>
+          <h2>Everything you need in one place</h2>
+        </div>
+        <div class="tool-grid">
+          <button class="tool-card" data-tool="Download" type="button"><span>⇩</span><b>Download</b><small>Save supported media</small></button>
+          <button class="tool-card" data-tool="Trim Video" type="button"><span>✂</span><b>Trim Video</b><small>Choose start and end</small></button>
+          <button class="tool-card" data-tool="Convert Video" type="button"><span>⇄</span><b>Convert Video</b><small>Change video format</small></button>
+          <button class="tool-card" data-tool="Convert to MP3" type="button"><span>♫</span><b>Convert to MP3</b><small>Extract audio</small></button>
+          <button class="tool-card" data-tool="Extract Audio" type="button"><span>♧</span><b>Extract Audio</b><small>Create an audio file</small></button>
+          <button class="tool-card" data-tool="Video to GIF" type="button"><span>GIF</span><b>Video to GIF</b><small>Create short GIFs</small></button>
+          <button class="tool-card" data-tool="Compress Video" type="button"><span>▣</span><b>Compress Video</b><small>Reduce file size</small></button>
+        </div>
+
+        <div class="premium-card">
+          <div>
+            <span class="premium-icon">ϟ</span>
+            <h2>No Limits, No Ads!</h2>
+            <p>Go Premium for unlimited downloads and faster processing.</p>
+          </div>
+          <button class="primary-btn" type="button" id="premiumBtn">Go Premium →</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light-section" id="history">
+      <div class="container">
+        <div class="section-heading row-heading">
+          <div>
+            <p class="eyebrow">HISTORY</p>
+            <h2>Recent Downloads</h2>
+          </div>
+          <button class="ghost-btn" id="clearHistoryBtn" type="button">Clear History</button>
+        </div>
+        <div id="historyList" class="history-list"></div>
+      </div>
+    </section>
+
+    <section class="section" id="how-to-use">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">HOW IT WORKS</p>
+          <h2>How to Download?</h2>
+        </div>
+        <div class="steps">
+          <article><span>1</span><h3>Copy the video link</h3><p>Copy a supported video URL and return to VideoHub.</p></article>
+          <article><span>2</span><h3>Paste and Analyze</h3><p>Paste the link above and click Analyze.</p></article>
+          <article><span>3</span><h3>Select options</h3><p>Choose format, quality and optional trim settings.</p></article>
+          <article><span>4</span><h3>Download</h3><p>Start the backend processing and save the finished file.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light-section" id="about">
+      <div class="container">
+        <div class="features">
+          <div><span>🛡️</span><h3>Fast &amp; Secure</h3><p>Designed for a secure connection to your own backend.</p></div>
+          <div><span>HD</span><h3>High Quality</h3><p>Quality choices can be provided by your backend.</p></div>
+          <div><span>▣</span><h3>All Devices</h3><p>Responsive layout for desktop, tablet and mobile.</p></div>
+          <div><span>♙</span><h3>No Registration</h3><p>The frontend does not require an account.</p></div>
+          <div><span>🔒</span><h3>Privacy Focused</h3><p>Keep your backend and storage rules under your control.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2026 VideoHub</span>
+      <span>Use this service only for content you are authorized to download.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
