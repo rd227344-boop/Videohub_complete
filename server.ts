@@ -132,9 +132,16 @@ app.delete("/api/jobs/:id", async (request, reply) => {
   await fs.rm(jobDir(id), { recursive: true, force: true });
   return { ok: true, state: "cancelled" };
 });
+  const start = async () => {
+  try {
+    await ensureDir();
+    const port = Number(process.env.PORT) || Number(config.port) || 3000;
+    await app.listen({ port, host: "0.0.0.0" });
+    console.log(`Videohub backend listening on ${port}`);
+  } catch (err) {
+    app.log.error(err);
+    process.exit(1);
+  }
+};
 
-await ensureDirs();
-const port = Number(process.env.PORT) || Number(config.port) || 3000;
-await app.listen({ port, host: "0.0.0.0" });
-console.log(`VideoHub backend listening on ${config.port}`);
-  });
+start();
