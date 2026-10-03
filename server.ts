@@ -122,7 +122,7 @@ app.get("/api/jobs/:id/download", async (request, reply) => {
   reply.type("application/octet-stream");
   return reply.send(await fs.readFile(filePath));
 });
-  app.delete('/api/jobs/:id', async (request, reply) => {
+    app.delete('/api/jobs/:id', async (request, reply) => {
     const { id } = request.params as { id: string };
     const job = await queue.getJob(id);
     if (!job) return reply.code(404).send({ error: "Job not found." });
@@ -142,7 +142,6 @@ app.get("/api/jobs/:id/download", async (request, reply) => {
       app.log.error(err);
       process.exit(1);
     }
-  };
 
   start();
   
