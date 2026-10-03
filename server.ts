@@ -142,6 +142,7 @@ app.get("/api/jobs/:id/download", async (request, reply) => {
       app.log.error(err);
       process.exit(1);
     }
+  }
 
   start();
   
