@@ -134,6 +134,7 @@ app.delete("/api/jobs/:id", async (request, reply) => {
 });
 
 await ensureDirs();
-await app.listen({ port: config.port, host: "0.0.0.0" });
+const port = Number(process.env.PORT) || Number(config.port) || 3000;
+await app.listen({ port, host: "0.0.0.0" });
 console.log(`VideoHub backend listening on ${config.port}`);
   });
