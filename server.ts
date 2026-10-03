@@ -49,8 +49,8 @@ const jobSchema = z.object({
   startSeconds: z.number().min(0).optional(),
   endSeconds: z.number().positive().optional(),
 });
-  const parsed = jobSchema.safeParse(request.body);
 app.post("/api/jobs", async (request, reply) => {
+  const parsed = jobSchema.safeParse(request.body);
   if (!parsed.success) {
     return reply.code(400).send({ error: "Invalid download options.", details: parsed.error.flatten() });
   }
